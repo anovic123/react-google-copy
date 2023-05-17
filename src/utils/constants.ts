@@ -1,0 +1,1 @@
+export const searchLucky = 'https://www.google.com/doodles';
