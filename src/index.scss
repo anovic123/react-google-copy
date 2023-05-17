@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(77, 81, 86);
+    font-size: 0.875rem;
+  }
+
+  a {
+    &:hover {
+      @apply underline;
+    }
+  }
+  .img {
+    &:hover {
+      @apply bg-gray-200 rounded-full;
+    }
+  }
+}
