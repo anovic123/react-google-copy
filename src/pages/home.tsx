@@ -7,10 +7,10 @@ import { Button } from '../components/ui-kit/button';
 import { searchLucky } from '../utils/constants';
 
 import Logo from '../assets/google-logo.png';
+
 interface HomePageProps {}
 
 export const HomePage: FC<HomePageProps> = ({}) => {
-
   return (
     <div className="flex h-[100vh] flex-col">
       <main className="grow flex justify-center">
