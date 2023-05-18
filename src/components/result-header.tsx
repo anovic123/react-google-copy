@@ -1,35 +1,32 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { TbGridDots } from 'react-icons/tb';
-import { AiOutlineSetting } from 'react-icons/ai';
-
 import { SearchInput } from './search-input';
 import { Button } from './ui-kit/button';
 
 import { headerNavigate } from '../common/mocks';
 
 import Logo from '../assets/small-logo.png';
+import { ResultHeaderActions } from './result-header-actions';
+import { useMediaQuery } from '../hooks/use-media-query';
 
 interface ResultHeaderProps {}
 
 export const ResultHeader: FC<ResultHeaderProps> = ({}) => {
   const [activeLink, setActiveLink] = useState('Все');
+  const isTablet = useMediaQuery(900);
 
   return (
     <header className="border-b border-[#ebebeb]">
-      <div className="p-[1.25rem] md:h-[4.3125rem] my-[.375rem] flex flex-wrap justify-between gap-5">
-        <div className="flex flex-wrap items-center gap-10 grow">
-          <Link to="/">
+      <div className="p-[0.5rem] md:p-[1.25rem] md:h-[4.3125rem] my-[.375rem] flex flex-wrap justify-between gap-5">
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 md:gap-10 flex-grow">
+          <Link to="/" className="max-w-screen-md:m-auto">
             <img src={Logo} alt="Logo" className="object-contain" height={30} width={92} />
           </Link>
           <SearchInput />
         </div>
-        <div className="flex items-center gap-5">
-          <AiOutlineSetting size={25} />
-          <TbGridDots size={25} />
-          <Button btnStyle="BLUE">Войти</Button>
-        </div>
+
+        {!isTablet && <ResultHeaderActions />}
       </div>
       <nav className="flex mt-1 md:ml-36 overflow-y-scroll md:overflow-y-auto max-h-screen">
         {headerNavigate.map(({ name, icon }: { name: string; icon: JSX.Element }) => (

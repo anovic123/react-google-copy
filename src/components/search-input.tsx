@@ -53,7 +53,7 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
   };
 
   return (
-    <div className="flex relative items-center min-h-[2.75rem] px-4 bg-white border border-solid border-gray-300 rounded-3xl w-full max-w-lg hover:shadow-blue-500/50">
+    <div className="flex relative items-center min-h-[2.75rem] px-2 md:px-2 bg-white border border-solid border-gray-300 rounded-3xl w-full max-w-lg hover:shadow-blue-500/50">
       <AiOutlineSearch size={20} />
       <input
         className="grow outline-0 text-black/[0.87] pl-2"
@@ -61,9 +61,9 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
         onKeyDown={handleClick}
       />
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1 md:gap-2">
         {searchValue && (
-          <div className="border-r border-gray-400 pr-2">
+          <div className="border-r border-gray-400 md:pr-2 pr-1">
             <IoMdClose size={23} className="cursor-pointer ml-1" onClick={clearSearchValue} />
           </div>
         )}
