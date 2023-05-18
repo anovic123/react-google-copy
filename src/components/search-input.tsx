@@ -53,7 +53,7 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
   };
 
   return (
-    <div className="flex items-center min-h-[2.75rem] px-4 bg-white border border-solid border-gray-300 rounded-3xl w-full max-w-lg hover:shadow-blue-500/50">
+    <div className="flex relative items-center min-h-[2.75rem] px-4 bg-white border border-solid border-gray-300 rounded-3xl w-full max-w-lg hover:shadow-blue-500/50">
       <AiOutlineSearch size={20} />
       <input
         className="grow outline-0 text-black/[0.87] pl-2"

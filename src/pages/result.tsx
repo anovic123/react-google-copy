@@ -16,7 +16,7 @@ interface ResultPageProps {}
 export const ResultPage: FC<ResultPageProps> = ({}) => {
   const { value } = useParams();
   const [data, setData] = useState<GoogleApiDataType | null>(null);
-  console.log('🚀 ~ file: result.tsx:15 ~ data:', data);
+  console.log('🚀 ~ file: result.tsx:21 ~ data:', data);
 
   useEffect(() => {
     fetchData();
@@ -40,8 +40,8 @@ export const ResultPage: FC<ResultPageProps> = ({}) => {
       <ResultHeader />
       <main className="grow p-[.75rem] pb-0 md:ml-36 md:pr-5 ">
         <div className="mb-1">
-          Результатов: {data?.searchInformation.totalResults} ({data?.searchInformation.searchTime}{' '}
-          сек.)
+          Результатов: {data?.searchInformation.totalResults} (
+          {data?.searchInformation.searchTime || 0} сек.)
         </div>
         {data?.items.map((item) => (
           <ResultItem key={v1()} {...item} />
