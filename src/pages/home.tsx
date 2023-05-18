@@ -16,7 +16,7 @@ export const HomePage: FC<HomePageProps> = ({}) => {
     <div className="flex h-[100vh] flex-col">
       <Header />
       <main className="grow flex justify-center">
-        <div className="w-full px-5 flex flex-col items-center mt-36">
+        <div className="w-full px-5 flex flex-col items-center mt-24 md:mt-36">
           <img className="w-[10.75rem] md:w-[17rem] mb-8" src={Logo} alt="Logo" />
           <SearchInput />
           <div className="flex flex-wrap justify-center my-7 gap-3">
