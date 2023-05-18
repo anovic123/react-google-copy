@@ -1,3 +1,4 @@
 export const ROUTES = {
-  HOME: '/'
+  HOME: '/',
+  RESULT: '/search/:query'
 } as const;

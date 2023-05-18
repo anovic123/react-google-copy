@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoMdClose } from 'react-icons/io';
 
@@ -16,10 +17,10 @@ declare global {
 interface SearchInputProps {}
 
 export const SearchInput: FC<SearchInputProps> = ({}) => {
+  const navigate = useNavigate();
+
   const [searchValue, setSearchValue] = useState<string>('');
   const [isRecording, setIsRecording] = useState<boolean>(false);
-
-  console.log('🚀 ~ file: search-input.tsx:12 ~ searchValue:', searchValue);
 
   const startListening = () => {
     setIsRecording(true);
@@ -32,6 +33,7 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
     recognition.onresult = (e: any) => {
       const result = e.results[0][0].transcript;
       setSearchValue(result);
+      navigate(`/search/${result}`);
     };
 
     recognition.onend = () => {
@@ -45,6 +47,10 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
     setSearchValue('');
   };
 
+  const handleClick = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.key === 'Enter' && navigate(`/search/${searchValue}`);
+  };
+
   return (
     <div className="flex items-center min-h-[2.75rem] px-4 bg-white border border-solid border-gray-300 rounded-3xl w-full max-w-lg hover:shadow-blue-500/50">
       <AiOutlineSearch size={20} />
@@ -52,6 +58,7 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
         className="grow outline-0 text-black/[0.87] pl-2"
         value={searchValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
+        onKeyDown={handleClick}
       />
       <div className="flex items-center gap-3">
         {searchValue && (

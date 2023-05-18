@@ -1,5 +1,17 @@
+import { GoSearch } from 'react-icons/go';
+import { BsImage, BsThreeDotsVertical } from 'react-icons/bs';
+import { BiNews } from 'react-icons/bi';
+import { RiVideoLine } from 'react-icons/ri';
+import { SlTag } from 'react-icons/sl';
 
-
+export const headerNavigate = [
+  { name: 'Все', icon: <GoSearch /> },
+  { name: 'Картинки', icon: <BsImage size={14} /> },
+  { name: 'Видео', icon: <BiNews /> },
+  { name: 'Новости', icon: <RiVideoLine /> },
+  { name: 'Покупки', icon: <SlTag size={14} />},
+  { name: 'Ещё', icon: <BsThreeDotsVertical /> }
+]
 
 export const footerLinks = [
   {

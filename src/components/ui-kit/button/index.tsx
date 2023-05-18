@@ -20,16 +20,17 @@ interface ButtonProps
 export const Button: FC<ButtonProps> = ({
   children,
   btnStyle = ButtonStyleEnum.PRIMARY,
+  onClick,
   ...props
 }) => {
-  const btnClasses = clsx('text-center cursor-pointer px-[.9375rem] h-[2.25rem] rounded-md', {
-    'bg-[#f8f9fa] border border-[#f8f9fa] hover:border-[#dadce0] hover:shadow-c2':
+  const btnClasses = clsx('text-center cursor-pointer  h-[2.25rem] rounded-md', {
+    'bg-[#f8f9fa] border border-[#f8f9fa] px-[.9375rem] hover:border-[#dadce0] hover:shadow-c2':
       btnStyle === ButtonStyleEnum.PRIMARY,
-    'bg-[#1a73e8] text-white hover:bg-[#0857bf]': btnStyle === ButtonStyleEnum.BLUE,
+    'bg-[#1a73e8] text-white px-[1.3rem] hover:bg-[#0857bf]': btnStyle === ButtonStyleEnum.BLUE,
   });
 
   return (
-    <button className={btnClasses} {...props}>
+    <button className={btnClasses} onClick={onClick} {...props}>
       {children}
     </button>
   );
