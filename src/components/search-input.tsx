@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoMdClose } from 'react-icons/io';
 
@@ -18,8 +18,9 @@ interface SearchInputProps {}
 
 export const SearchInput: FC<SearchInputProps> = ({}) => {
   const navigate = useNavigate();
+  const { value } = useParams();
 
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>(value || '');
   const [isRecording, setIsRecording] = useState<boolean>(false);
 
   const startListening = () => {
