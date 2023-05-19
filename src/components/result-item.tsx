@@ -10,7 +10,7 @@ export const ResultItem: FC<ResultItemProps> = ({ title, link, htmlSnippet }) =>
   return <div className="flex flex-col py-1 max-w-[43.75rem]">
     <div className="group cursor-pointer" onClick={() => window.open(link, '_blank')}>
 
-      <div className="group-hover:underline text-xl text-[#1a0dab] pt-2">
+      <div className="group-hover:underline text-xl text-[#1a0dab] pt-2 font-medium">
         {title}
       </div>
 
