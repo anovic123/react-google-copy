@@ -66,6 +66,11 @@ export interface Item {
   cacheId?: string
   mime?: string
   fileFormat?: string
+  image?: ItemImage
+}
+
+export interface ItemImage {
+  contextLink: string;
 }
 
 export interface Pagemap {

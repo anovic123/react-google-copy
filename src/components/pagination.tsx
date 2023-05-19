@@ -11,13 +11,12 @@ interface PaginationProps {
 }
 
 export const Pagination: FC<PaginationProps> = ({ startIndex, setStartIndex }) => {
-
   const handleNextPage = (page: number) => {
     setStartIndex(page);
   };
 
   return (
-    <div className="my-8 w-auto md:w-[550px] flex flex-col gap-3 items-center">
+    <div className="my-8 w-auto md:w-[624px] flex flex-col gap-3 items-center">
       <img src={PAGINATION_LOGO} alt="Pagination logo" width={300} />
       <div className="flex gap-3 items-center">
         {paginationData.map(({ page }) => {

@@ -10,10 +10,12 @@ import Logo from '../assets/small-logo.png';
 import { ResultHeaderActions } from './result-header-actions';
 import { useMediaQuery } from '../hooks/use-media-query';
 
-interface ResultHeaderProps {}
+interface ResultHeaderProps {
+  activeLink: string;
+  setActiveLink: React.Dispatch<React.SetStateAction<string>>;
+}
 
-export const ResultHeader: FC<ResultHeaderProps> = ({}) => {
-  const [activeLink, setActiveLink] = useState('Все');
+export const ResultHeader: FC<ResultHeaderProps> = ({ activeLink, setActiveLink }) => {
   const isTablet = useMediaQuery(900);
 
   return (

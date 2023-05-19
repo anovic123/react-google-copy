@@ -12,11 +12,12 @@ const params = {
 interface GoogleApiDataPayload {
   q: string;
   start: number;
+  searchType?: string
 }
 
-export const googleApiData = async ({ q, start }: GoogleApiDataPayload): Promise<GoogleApiDataType> => {
+export const googleApiData = async ({ q, start, searchType  }: GoogleApiDataPayload): Promise<GoogleApiDataType> => {
   const { data } = await axios.get(BASE_URL, {
-    params: { ...params, ...{ q, start } }
+    params: { ...params, ...{ q, start, searchType } }
   })
 
   return data
