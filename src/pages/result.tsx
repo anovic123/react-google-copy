@@ -22,7 +22,6 @@ export const ResultPage: FC<ResultPageProps> = () => {
   const [startIndex, setStartIndex] = useState<number>(1);
   const [activeLink, setActiveLink] = useState('Все');
 
-
   useEffect(() => {
     fetchData();
     window.scrollTo(0, 0);
@@ -65,9 +64,12 @@ export const ResultPage: FC<ResultPageProps> = () => {
     <div className="flex flex-col min-h-[100vh]">
       <ResultHeader activeLink={activeLink} setActiveLink={setActiveLink} />
       <main className="grow p-[.75rem] pb-0 md:ml-36 md:pr-5 ">
-        <div className="mb-1">
-          Результатов: {formattedTotalResults} ({roundedSearchTime} сек.)
-        </div>
+        {!emptyResults && (
+          <div className="mb-1">
+            Результатов: {formattedTotalResults} ({roundedSearchTime} сек.)
+          </div>
+        )}
+
         {!emptyResults ? (
           !isImages ? (
             data?.items.map((item) => <ResultItem key={v1()} {...item} />)
@@ -81,7 +83,7 @@ export const ResultPage: FC<ResultPageProps> = () => {
         ) : (
           <NotFound value={value} />
         )}
-        {data?.queries.nextPage && (
+        {data?.queries.nextPage && !emptyResults && (
           <Pagination startIndex={startIndex} setStartIndex={setStartIndex} />
         )}
       </main>
