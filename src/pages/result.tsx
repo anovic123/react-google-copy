@@ -11,17 +11,17 @@ import { GoogleApiDataType } from '../common/types';
 import { ResultItem } from '../components/result-item';
 import { Pagination } from '../components/pagination';
 import { ResultImageItem } from '../components/result-image-item';
+import { NotFound } from '../components/not-found';
 
 interface ResultPageProps {}
 
 export const ResultPage: FC<ResultPageProps> = () => {
   const { value } = useParams();
-  const [data, setData] = useState<GoogleApiDataType | null>(null);
-  console.log('🚀 ~ file: result.tsx:20 ~ data:', data);
 
+  const [data, setData] = useState<GoogleApiDataType | null>(null);
   const [startIndex, setStartIndex] = useState<number>(1);
   const [activeLink, setActiveLink] = useState('Все');
-  console.log('🚀 ~ file: result.tsx:22 ~ activeLink:', activeLink);
+
 
   useEffect(() => {
     fetchData();
@@ -35,7 +35,11 @@ export const ResultPage: FC<ResultPageProps> = () => {
     try {
       let result;
       if (activeLink === 'Картинки') {
-        result = await googleApiData({ q: value, start: startIndex, searchType: 'image' });
+        result = await googleApiData({
+          q: value,
+          start: startIndex,
+          searchType: 'image',
+        });
       } else {
         result = await googleApiData({ q: value, start: startIndex });
       }
@@ -45,11 +49,17 @@ export const ResultPage: FC<ResultPageProps> = () => {
     }
   };
 
+  const isImages = activeLink === 'Картинки';
+
   const formattedTotalResults = data?.searchInformation.formattedTotalResults || 0;
   const searchTime = data?.searchInformation.searchTime || 0;
   const roundedSearchTime = searchTime.toFixed(2);
 
-  const isImages = activeLink === 'Картинки';
+  const emptyResults =
+    activeLink === 'Видео' ||
+    activeLink === 'Новости' ||
+    activeLink === 'Покупки' ||
+    activeLink === 'Ещё';
 
   return (
     <div className="flex flex-col min-h-[100vh]">
@@ -58,14 +68,18 @@ export const ResultPage: FC<ResultPageProps> = () => {
         <div className="mb-1">
           Результатов: {formattedTotalResults} ({roundedSearchTime} сек.)
         </div>
-        {!isImages ? (
-          data?.items.map((item) => <ResultItem key={v1()} {...item} />)
+        {!emptyResults ? (
+          !isImages ? (
+            data?.items.map((item) => <ResultItem key={v1()} {...item} />)
+          ) : (
+            <div className="flex justify-center md:justify-start flex-wrap gap-3 max-w-[56.25rem]">
+              {data?.items.map((item) => (
+                <ResultImageItem key={v1()} {...item} />
+              ))}
+            </div>
+          )
         ) : (
-          <div className="flex flex-wrap gap-3 max-w-[790px]">
-            {data?.items.map((item) => (
-              <ResultImageItem key={v1()} {...item} />
-            ))}
-          </div>
+          <NotFound value={value} />
         )}
         {data?.queries.nextPage && (
           <Pagination startIndex={startIndex} setStartIndex={setStartIndex} />
