@@ -9,16 +9,18 @@ import { ResultHeader } from '../components/result-header';
 
 import { GoogleApiDataType } from '../common/types';
 import { ResultItem } from '../components/result-item';
+import { Pagination } from '../components/pagination';
 
 interface ResultPageProps {}
 
 export const ResultPage: FC<ResultPageProps> = ({}) => {
   const { value } = useParams();
   const [data, setData] = useState<GoogleApiDataType | null>(null);
+  const [startIndex, setStartIndex] = useState<number>(1);
 
   useEffect(() => {
     fetchData();
-  }, [value]);
+  }, [value, startIndex]);
 
   const fetchData = async () => {
     if (!value) {
@@ -26,14 +28,14 @@ export const ResultPage: FC<ResultPageProps> = ({}) => {
     }
 
     try {
-      const result = await googleApiData({ q: value, start: 1  });
+      const result = await googleApiData({ q: value, start: startIndex });
       setData(result);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const formattedTotalResults = data?.searchInformation.formattedTotalResults || '';
+  const formattedTotalResults = data?.searchInformation.formattedTotalResults || 0;
   const searchTime = data?.searchInformation.searchTime || 0;
   const roundedSearchTime = searchTime.toFixed(2);
 
@@ -47,6 +49,12 @@ export const ResultPage: FC<ResultPageProps> = ({}) => {
         {data?.items.map((item) => (
           <ResultItem key={v1()} {...item} />
         ))}
+        {data?.queries.nextPage && (
+          <Pagination
+            startIndex={startIndex}
+            setStartIndex={setStartIndex}
+          />
+        )}
       </main>
       <Footer />
     </div>
