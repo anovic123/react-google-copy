@@ -6,12 +6,12 @@ import { googleApiData } from '../api/googleApi';
 
 import { Footer } from '../components/footer';
 import { ResultHeader } from '../components/result-header';
-
-import { GoogleApiDataType } from '../common/types';
 import { ResultItem } from '../components/result-item';
 import { Pagination } from '../components/pagination';
 import { ResultImageItem } from '../components/result-image-item';
 import { NotFound } from '../components/not-found';
+
+import { GoogleApiDataType } from '../common/types';
 
 interface ResultPageProps {}
 
