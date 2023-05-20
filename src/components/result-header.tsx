@@ -2,13 +2,13 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SearchInput } from './search-input';
-import { Button } from './ui-kit/button';
+import { ResultHeaderActions } from './result-header-actions';
 
 import { headerNavigate } from '../common/mocks';
 
-import Logo from '../assets/small-logo.png';
-import { ResultHeaderActions } from './result-header-actions';
 import { useMediaQuery } from '../hooks/use-media-query';
+
+import Logo from '../assets/small-logo.png';
 
 interface ResultHeaderProps {
   activeLink: string;
