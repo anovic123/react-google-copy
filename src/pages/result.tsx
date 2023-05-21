@@ -59,7 +59,8 @@ export const ResultPage: FC<ResultPageProps> = () => {
     activeLink === 'Видео' ||
     activeLink === 'Новости' ||
     activeLink === 'Покупки' ||
-    activeLink === 'Ещё';
+    activeLink === 'Ещё' ||
+    !data?.items;
 
   return (
     <>
