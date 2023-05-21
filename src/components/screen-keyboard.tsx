@@ -46,6 +46,7 @@ export const ScreenKeyboard: FC<ScreenKeyboardProps> = ({ setSearchValue, handle
 
   return (
     <div className="flex justify-center z-10 w-[100%] left-0 flex-wrap gap-1 md:gap-2 absolute top-14 bg-white border rounded p-[0.45rem] md:p-[0.5rem]">
+      
       {!isSymbols
         ? isLanguage === 'En'
           ? renderButtons(keyboardEnButtons)

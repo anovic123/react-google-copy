@@ -78,10 +78,10 @@ export const ResultPage: FC<ResultPageProps> = () => {
 
           {!emptyResults ? (
             !isImages ? (
-              data?.items.map((item) => <ResultItem key={v1()} {...item} />)
+              data?.items?.map((item) => <ResultItem key={v1()} {...item} />)
             ) : (
               <div className="flex justify-center md:justify-start flex-wrap gap-3 max-w-[56.25rem]">
-                {data?.items.map((item) => (
+                {data?.items?.map((item) => (
                   <ResultImageItem key={v1()} {...item} />
                 ))}
               </div>
@@ -89,7 +89,7 @@ export const ResultPage: FC<ResultPageProps> = () => {
           ) : (
             <NotFound value={value} />
           )}
-          {data?.queries.nextPage && !emptyResults && (
+          {data?.queries?.nextPage && !emptyResults && (
             <Pagination startIndex={startIndex} setStartIndex={setStartIndex} />
           )}
         </main>
