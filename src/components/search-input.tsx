@@ -92,13 +92,13 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
         )}
         <img
           src={KeyboardIcon}
-          className="h-6 w-6 cursor-pointer img"
+          className="h-5 w-5 sm:h-6  sm:w-6 cursor-pointer img"
           alt="keyboard"
           onClick={handleKeyboard}
         />
         <img
           src={Microphone}
-          className="h-6 w-6 cursor-pointer img"
+          className="h-5 w-5 sm:h-6  sm:w-6 cursor-pointer img"
           alt="Microphone"
           onClick={startListening}
         />
