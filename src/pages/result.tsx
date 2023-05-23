@@ -20,6 +20,7 @@ export const ResultPage: FC<ResultPageProps> = () => {
   const { value } = useParams();
 
   const [data, setData] = useState<GoogleApiDataType | null>(null);
+  console.log("🚀 ~ file: result.tsx:23 ~ data:", data)
   const [startIndex, setStartIndex] = useState<number>(1);
   const [activeLink, setActiveLink] = useState<string>('Все');
 

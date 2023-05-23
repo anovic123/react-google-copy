@@ -70,7 +70,7 @@ export const SearchInput: FC<SearchInputProps> = ({}) => {
 
   return (
     <div className="flex items-center min-h-[2.75rem] relative px-[0.4rem] md:px-2 bg-white border border-solid border-gray-300 rounded-3xl w-full max-w-[33.75rem] hover:shadow-blue-500/50">
-      <AiOutlineSearch size={20} />
+      <AiOutlineSearch size={20} className="cursor-pointer" onClick={handleEnter} />
       <input
         className="grow outline-0 font-medium text-black/[0.87] pl-[.0625rem] sm:pl-2"
         value={searchValue}
