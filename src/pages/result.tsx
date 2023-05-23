@@ -16,13 +16,15 @@ import { GoogleApiDataType } from '../common/types';
 
 interface ResultPageProps {}
 
+export type ActiveLinkType = 'Все' | 'Картинки' | 'Видео' | 'Новости' | 'Покупки' | 'Ещё';
+
 export const ResultPage: FC<ResultPageProps> = () => {
   const { value } = useParams();
 
   const [data, setData] = useState<GoogleApiDataType | null>(null);
-  console.log("🚀 ~ file: result.tsx:23 ~ data:", data)
   const [startIndex, setStartIndex] = useState<number>(1);
-  const [activeLink, setActiveLink] = useState<string>('Все');
+  const [activeLink, setActiveLink] = useState<ActiveLinkType>('Все');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     fetchData();
@@ -34,6 +36,7 @@ export const ResultPage: FC<ResultPageProps> = () => {
       return;
     }
     try {
+      setLoading(true);
       let result;
       if (activeLink === 'Картинки') {
         result = await googleApiData({
@@ -45,8 +48,10 @@ export const ResultPage: FC<ResultPageProps> = () => {
         result = await googleApiData({ q: value, start: startIndex });
       }
       setData(result);
+      setLoading(false);
     } catch (err) {
       console.error(err);
+      setLoading(false);
     }
   };
 
@@ -72,26 +77,29 @@ export const ResultPage: FC<ResultPageProps> = () => {
       <div className="flex flex-col min-h-[100vh]">
         <ResultHeader activeLink={activeLink} setActiveLink={setActiveLink} />
         <main className="grow p-[.75rem] pb-0 md:ml-36 md:pr-5 ">
-          {!emptyResults && (
+          {!loading && !emptyResults && (
             <div className="mb-1">
               Результатов: {formattedTotalResults} ({roundedSearchTime} сек.)
             </div>
           )}
 
-          {!emptyResults ? (
-            !isImages ? (
-              data?.items?.map((item) => <ResultItem key={v1()} {...item} />)
+          {!loading ? (
+            !emptyResults ? (
+              !isImages ? (
+                data?.items?.map((item) => <ResultItem key={v1()} {...item} />)
+              ) : (
+                <div className="flex justify-center md:justify-start flex-wrap gap-3 max-w-[56.25rem]">
+                  {data?.items?.map((item) => (
+                    <ResultImageItem key={v1()} {...item} />
+                  ))}
+                </div>
+              )
             ) : (
-              <div className="flex justify-center md:justify-start flex-wrap gap-3 max-w-[56.25rem]">
-                {data?.items?.map((item) => (
-                  <ResultImageItem key={v1()} {...item} />
-                ))}
-              </div>
+              <NotFound value={value} />
             )
-          ) : (
-            <NotFound value={value} />
-          )}
-          {data?.queries?.nextPage && !emptyResults && (
+          ) : null}
+
+          {!loading && data?.queries?.nextPage && !emptyResults && (
             <Pagination startIndex={startIndex} setStartIndex={setStartIndex} />
           )}
         </main>

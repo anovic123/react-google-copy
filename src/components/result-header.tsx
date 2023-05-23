@@ -9,10 +9,11 @@ import { headerNavigate } from '../common/mocks';
 import { useMediaQuery } from '../hooks/use-media-query';
 
 import Logo from '../assets/small-logo.png';
+import { ActiveLinkType } from '../pages/result';
 
 interface ResultHeaderProps {
   activeLink: string;
-  setActiveLink: React.Dispatch<React.SetStateAction<string>>;
+  setActiveLink: React.Dispatch<React.SetStateAction<ActiveLinkType>>;
 }
 
 export const ResultHeader: FC<ResultHeaderProps> = ({ activeLink, setActiveLink }) => {
@@ -31,7 +32,7 @@ export const ResultHeader: FC<ResultHeaderProps> = ({ activeLink, setActiveLink 
         {!isTablet && <ResultHeaderActions />}
       </div>
       <nav className="flex mt-1 md:ml-36 overflow-y-scroll md:overflow-y-auto max-h-screen">
-        {headerNavigate.map(({ name, icon }: { name: string; icon: JSX.Element }) => (
+        {headerNavigate.map(({ name, icon }: { name: any, icon: JSX.Element }) => (
           <span
             key={`headerLink-${name}`}
             className={`flex items-center p-3 text-[#5f6368] cursor-pointer relative ${
